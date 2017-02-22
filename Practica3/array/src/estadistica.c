@@ -107,3 +107,5 @@ int calcularDesviacionTipica(double var, int num_elem, double * desviacionTipica
 	*desviacionTipica=sqrt(var);
 	
 }
+
+/*TEST*/
