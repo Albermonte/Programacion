@@ -3,12 +3,13 @@
 
 int copiarArray(double *p, int num_elem, const double * datos)
 {
-	if(*p)
+	if(!p)
 	{
-	p=malloc(num_elem*sizeof(double));
-	double * strcpy(double *p,double *datos);
+		p=malloc(num_elem*sizeof(double));
+		double * strcpy(double *p,double *datos);
 	
-	return 0;
+		return 0;
+		
 	}
 	else
 	{
