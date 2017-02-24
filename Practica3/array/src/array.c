@@ -3,21 +3,25 @@
 
 int copiarArray(double *p, int num_elem, const double * datos)
 {
-	/*double *p=NULL;
-	int num_elem;
-
-	printf("Num elementos:\t");
-	scanf("%d",&num_elem);
-	*/
+	if(*p)
+	{
 	p=malloc(num_elem*sizeof(double));
 	double * strcpy(double *p,double *datos);
 	
-	if (strcmp(p,datos)==0)
-	{
-		return 0;
+	return 0;
 	}
 	else
 	{
 		return -1;
 	}
+}
+
+int  imprimirArray(const double * p, int num_elem)
+{
+	int i;
+	for(i=0;i<num_elem;i++)
+	{
+		printf("Elemento %d:\t%f",i,p[i]);
+	}
+
 }
