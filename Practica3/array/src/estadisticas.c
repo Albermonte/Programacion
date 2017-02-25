@@ -25,13 +25,14 @@ int calcularMayor(const double *p,  int num_elem, double * mayor)
 		else
 		{
 			return -1;
-		}
+		} 
 	return 0;
 	}
 	else
 	{
 		return -1;
 	}
+	
 }
 
 int calcularMenor(const double *p, int num_elem, double * menor)

@@ -25,7 +25,7 @@ int  imprimirArray(const double * p, int num_elem)
 	{
 	for(i=0;i<num_elem;i++)
 	{
-		printf("Elemento %d:\t%f",i,p[i]);
+		printf("Elemento %d:\t%f",i,&p[i]);
 	}
 	}
 }
