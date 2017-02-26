@@ -27,11 +27,23 @@ int quitarEspacios(const char *textoCon, char *textoSin)
 			i--;
 		}
 	}
+	
 	//Medir longitud de array
 	//For i<longitud
 	//Comparar cada elemento de array con ' ' y ','
 	//Si elemento==' 'o','
 	//For j=i;j<longitud;j++
-	//array[i]=array[i++]
+	//array[j]=array[j+1]
 	//Fuera del for, longitud--
+	
+	char *line2;
+	line2 = malloc(longitud);
+	int c=0,a;
+	a = longitud-1;
+	while (c < longitud)
+	{
+		line2[c] = line[a];
+		c++;
+		a--;
+	}
 }
