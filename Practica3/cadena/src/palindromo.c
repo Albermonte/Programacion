@@ -3,47 +3,55 @@
 int quitarEspacios(const char *textoCon, char *textoSin)
 {
 	int longitud, i, j;
-
-	longitud = strlen(line);
+	
+	longitud = strlen(textoCon); //Medir longitud de array
 
 	for (i = 0; i < longitud; i++)
 	{
-		if (line[i] == ' ')
+		if (textoCon[i] == ' ') //Comprobar si cada elemento del array es un espacio
 		{
 			for (j = i; j < longitud; j++)
 			{
-				line[j] = line[j+1];
+				textoCon[j] = textoCon[j+1]; //Mover todo el array una posición atrás
 			}
-			longitud--;
-			i--;
+			longitud--; //Reducir la longitud del array
+			i--; //Reducir el contador en uno ya que después de una coma va un espacio y no se comprobaría
 		}
-		if (line[i] == ',')
+		if (textoCon[i] == ',') //Comprobar si cada elemento del array es una coma
 		{
 			for (j = i; j < longitud; j++)
 			{
-				line[j] = line[j + 1];
+				textoCon[j] = textoCon[j + 1]; //Mover todo el array una posición atrás
 			}
-			longitud--;
-			i--;
+			longitud--; //Reducir la longitud del array
+			i--; //Reducir el contador en uno ya que después de una coma va un espacio y no se comprobaría
 		}
 	}
+	strcpy(textoSin,textoCon);
 	
-	//Medir longitud de array
-	//For i<longitud
-	//Comparar cada elemento de array con ' ' y ','
-	//Si elemento==' 'o','
-	//For j=i;j<longitud;j++
-	//array[j]=array[j+1]
-	//Fuera del for, longitud--
-	
-	char *line2;
-	line2 = malloc(longitud);
+}
+
+int comprobarPalindromo(const char *cadena)
+{
+	char *cadena2; //Array para invertir y comprobar
+	longitud = strlen(cadena); 
+	cadena2 = malloc(longitud);
 	int c=0,a;
 	a = longitud-1;
 	while (c < longitud)
 	{
-		line2[c] = line[a];
+		cadena2[c] = cadena[a]; //Guardar en el array cadena2, cadena invertido
 		c++;
 		a--;
 	}
+
+	if (strcmp(cadena2,cadena)!=0) 
+	{
+		return 0;
+	}
+	else
+	{
+		return 1; //Si son iguales strcmp==0, entonces return 1
+	}
+
 }
