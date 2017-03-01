@@ -7,7 +7,7 @@ int calcularMayor(const double *p,  int num_elem, double * mayor)
 	double var=0;
 	double num=-1;
 	
-	if(!p || num_elem>0 || mayor!=NULL)
+	if(!p && num_elem>0 && mayor!=NULL)
 	{
 		for (i=0;i<num_elem;i++)
 		{
@@ -41,7 +41,7 @@ int calcularMenor(const double *p, int num_elem, double * menor)
 	double var=0;
 	double num=-1;
 
-	if(!p || num_elem>0 || menor!=NULL)
+	if(!p && num_elem>0 && menor!=NULL)
 	{
 	for (i=0;i<num_elem;i++)
 	{

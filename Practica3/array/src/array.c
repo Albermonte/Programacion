@@ -8,7 +8,7 @@ int copiarArray(double *p, int num_elem, const double * datos)
 	{
 		p=malloc(num_elem*sizeof(double));
 		double * strcpy(double *p,double *datos);
-	
+		
 		return 0;
 		
 	}
