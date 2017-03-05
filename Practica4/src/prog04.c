@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "../include/prog04.h"
 
 int introducirCiudad(Ciudad_t* datos, int tam, int* n, const char* nombre, int poblacion)
@@ -112,30 +113,51 @@ int ordenarCiudadesPorPoblacion(Ciudad_t* datos, int tam, int n, int orden)
 	}
 	else
 	{
+		
 		if(orden==1) //Ordenar por poblacion descendente
 		{
-			int i, b=0;
-			for(i=0;i<n;i++)
+			
+			int i, j;
+			Ciudad_t b;
+			for (i = n; i>=0; i--)
 			{
-				if(b<datos[i].poblacion)
+				for (j = n; j>=0; j--)
 				{
-					b=datos[i];
-					
+					if (datos[j].poblacion > datos[j + 1].poblacion)
+					{
+						b = datos[j];
+						datos[j] = datos[j + 1];
+						datos[j + 1] = b;
+					}
 				}
+
 			}
-				return 0;
-			}
+			return 0;
 		}
 		else if(orden==-1) //Ordenar por poblacion ascendente
 		{
-			
+			int i, j;
+			Ciudad_t b;
+			for (i = 0; i<n; i++)
+			{
+				for (j = 0; j<n; j++)
+				{
+					if (datos[j].poblacion > datos[j + 1].poblacion)
+					{
+						b = datos[j];
+						datos[j] = datos[j + 1];
+						datos[j + 1] = b;
+					}
+				}
+			}
 			return 0;
 		}
+		
 		else
 		{
 			return -1;
 		}
-	
 	}
-
 }
+
+
