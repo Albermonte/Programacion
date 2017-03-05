@@ -122,7 +122,7 @@ int ordenarCiudadesPorPoblacion(Ciudad_t* datos, int tam, int n, int orden)
 			{
 				for (j = n; j>=0; j--)
 				{
-					if (datos[j].poblacion > datos[j + 1].poblacion)
+					if (datos[j].poblacion < datos[j + 1].poblacion)
 					{
 						b = datos[j];
 						datos[j] = datos[j + 1];
@@ -158,5 +158,6 @@ int ordenarCiudadesPorPoblacion(Ciudad_t* datos, int tam, int n, int orden)
 		}
 	}
 }
+
 
 
