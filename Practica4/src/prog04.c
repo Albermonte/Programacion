@@ -114,24 +114,15 @@ int ordenarCiudadesPorPoblacion(Ciudad_t* datos, int tam, int n, int orden)
 	{
 		if(orden==1) //Ordenar por poblacion descendente
 		{
-			int j;
-			Ciudad_t *array;
-			array=malloc(n*sizeof(Ciudad_t));
-			for(j=0;j<n;j++)
+			int i, b=0;
+			for(i=0;i<n;i++)
 			{
-				int i,a=0,b=1,c=0;
-				for(i=0;i<n;i++)
+				if(b<datos[i].poblacion)
 				{
-					if(a<datos[i].poblacion && c!=b)
-					{
-						a=datos[i].poblacion;
-						b=i;
-					}
+					b=datos[i];
+					
 				}
-				
-				strcpy(array[j].nombre,datos[b].nombre);
-				strcpy(array[j].nombre,datos[b].poblacion);
-				c=b;
+			}
 				return 0;
 			}
 		}
