@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include "../include/prog04.h"
 
 int introducirCiudad(Ciudad_t* datos, int tam, int* n, const char* nombre, int poblacion)
