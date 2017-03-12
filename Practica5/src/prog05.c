@@ -1,9 +1,10 @@
 /* Nombre Fichero: src/prog05.c */
 
 #include "prog05.h"
+#include <math.h>
 
 int inicializarPunteros(Cliente_t *array, Cliente_t **punteros, int tam) {
-	if(array<1 || punteros<1 || tam!=MAX_ARRAY)
+	if(array==NULL || punteros==NULL || tam!=MAX_ARRAY)
 	{
 		return -1;
 	}
@@ -21,7 +22,7 @@ int inicializarPunteros(Cliente_t *array, Cliente_t **punteros, int tam) {
 }
 
 int introducirCliente(Cliente_t *array, int tam, int* n, char* nombre, char* apellido, float ingresos) {
-   if(array<1 || tam!=MAX_ARRAY || n<1 || nombre<1 || apellido <1 || ingresos<0)
+   if(array==NULL || tam!=MAX_ARRAY || n==NULL || nombre==NULL || apellido==NULL || ingresos<0)
    {
    		return -1;
    }
@@ -38,7 +39,7 @@ int introducirCliente(Cliente_t *array, int tam, int* n, char* nombre, char* ape
 }
 
 int mostrarDatosArrayEstructuras(const Cliente_t* array, int tam, int n) {
-   if(array<1 || tam!=MAX_ARRAY || n>tam || n<1)
+   if(array==NULL || tam!=MAX_ARRAY || n>tam || n<1)
    {
    		return -1;
    }
@@ -56,7 +57,7 @@ int mostrarDatosArrayEstructuras(const Cliente_t* array, int tam, int n) {
 }
 
 int mostrarDatosArrayPunteros(Cliente_t **punteros, int tam, int n) {
-  if(punteros<1 || tam!=MAX_ARRAY || n>tam || n<1)
+  if(punteros==NULL || tam!=MAX_ARRAY || n>tam || n<1)
   {
   	return -1;
   }
@@ -66,7 +67,7 @@ int mostrarDatosArrayPunteros(Cliente_t **punteros, int tam, int n) {
 	  int i;
 	  for(i=0;i<n;i++)
 	  {
-	  printf("Nombre: %s, Apellido: %s, Ingresos: %f\n",*punteros[i]->nombre,*punteros[i]->apellido,punteros[i]->ingresos);
+	  printf("Nombre: %s, Apellido: %s, Ingresos: %f\n",punteros[i]->nombre,punteros[i]->apellido,punteros[i]->ingresos);
 	  }
 	  
 	  return 0;
@@ -74,14 +75,15 @@ int mostrarDatosArrayPunteros(Cliente_t **punteros, int tam, int n) {
 }
 
 float calcularVarianzaIngresosArrayEstructuras(const Cliente_t *array, int tam, int n) {
-	if(array<1 || tam!=MAX_ARRAY || n>tam || n<1)
+	if(array==NULL || tam!=MAX_ARRAY || n>tam || n<1)
 	{
 		return -1;
 	}
 	
 	else
 	{
-		int i, vari=0, ingresos=0, media=0;
+		int i;
+		float vari=0, media=0;
 	 	for(i=0;i<n;i++)
 	 	{
 	 		media=media+array[i].ingresos;
@@ -91,16 +93,16 @@ float calcularVarianzaIngresosArrayEstructuras(const Cliente_t *array, int tam, 
 	 	
 	 	for(i=0;i<n;i++)
 		{
-			ingresos=ingresos+array[i].ingresos;
+			vari=vari+(pow((array[i].ingresos-media),2));
 		}
-		vari=((pow((ingresos-media),2))/n);
+		vari=vari/n;
 	
 		return vari;
 	}
 }
 
 int ordenarPorNombreArrayPunteros(Cliente_t **punteros, int tam, int n) {
-	if(punteros<1 || tam!=MAX_ARRAY || n<1 || n>tam)
+	if(punteros==NULL || tam!=MAX_ARRAY || n<1 || n>tam)
 	{
  		return -1;
   	}
@@ -111,13 +113,15 @@ int ordenarPorNombreArrayPunteros(Cliente_t **punteros, int tam, int n) {
 	Cliente_t *temp;
 	for(i=0; i<n; i++) 
 	{
- 		for(j=0; j<n; j++) 
+ 		for(j=0; j<n-1; j++) 
  	 	{
-  			if(strcmp(*punteros[j]->nombre, *punteros[j+1]->nombre) > 0) 
+  			if(strcmp(punteros[j]->nombre, punteros[j+1]->nombre) > 0)
   			{
+
 			temp = punteros[j];
 			punteros[j] = punteros[j+1];
 			punteros[j+1] = temp;
+
 			}
     	}
 	}
