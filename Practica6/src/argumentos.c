@@ -1,10 +1,10 @@
 /* Nombre Fichero: src/argumentos.c */
 
-#include "argumentos.h"
+#include "../include/argumentos.h"
 
 int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 {
-	if(strlen(argv[2])!=1)
+	if(0/*strlen(argv[2])!=1*/)
 	{
 		return -1;
 	}

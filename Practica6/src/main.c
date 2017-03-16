@@ -5,8 +5,8 @@
 #include <string.h>
 #include <math.h>
 
-#include "argumentos.h"
-#include "operaciones.h"
+#include "../include/argumentos.h"
+#include "../include/operaciones.h"
 
 
 int main(int argc, char** argv)
