@@ -1,6 +1,6 @@
 /* Nombre Fichero: src/operaciones.c */
 
-#include "../include/operaciones.h"
+#include "operaciones.h"
 
 int realizarOperacion(double op1, double op2, char operacion)
 {
@@ -10,9 +10,10 @@ int realizarOperacion(double op1, double op2, char operacion)
 	}
 	else
 	{
-		float resultado=0;
+		float resultado;
 		
 		printf("Operacion: %c\n",operacion);
+		printf("op1: %f",op1);
 		switch(operacion)
 		{
 			case '+':
