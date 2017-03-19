@@ -11,32 +11,29 @@ int realizarOperacion(double op1, double op2, char operacion)
 	else
 	{
 		float resultado;
-		
-		printf("Operacion: %c\n",operacion);
-		printf("op1: %f",op1);
 		switch(operacion)
 		{
 			case '+':
-				printf("Suma");
+				printf("Suma: \n");
 				resultado = op1 + op2;
 				break;
 			case '-':
-				printf("Resta");
+				printf("Resta: \n");
 				resultado = op1 - op2;
 				break;
 			case '*':
-				printf("Multipicacion");
+				printf("Multipicacion: \n");
 				resultado = op1 + op2;
 				break;
 			case '/':
-				printf("Division");
+				printf("Division: \n");
 				resultado = op1 / op2;
 				break;
 			default:
 				printf("Introduce una operacion correcta\n\n");
 		}
 			
-		printf(" resultado: %f",resultado);
+		printf(" Resultado: %f",resultado);
 		return resultado;
 	}
 }
