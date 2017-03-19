@@ -11,6 +11,7 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 	else
 	{
 	int i,j,n=0;
+	char *p1, *p2;
 	switch(argc)
 	{
 		case 4: 					//5.0 + 6.0
@@ -35,21 +36,21 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 				}
 				if(argv[1][i]=='-')
 				{
-					argv[strlen(argv[1])-1]='\0';
+					
 					*op1=atof(argv[1]);
 					*op2=atof(argv[2]);
 					strcpy(operacion,"-");
 				}
 				if(argv[1][i]=='*')
 				{
-					argv[strlen(argv[1])-1]='\0';
+					
 					*op1=atof(argv[1]);
 					*op2=atof(argv[2]);
 					strcpy(operacion,"*");
 				}
 				if(argv[1][i]=='/')
 				{
-					argv[strlen(argv[1])-1]='\0';
+					
 					*op1=atof(argv[1]);
 					*op2=atof(argv[2]);
 					strcpy(operacion,"/");
@@ -90,20 +91,24 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 			}	
 			break;
 		case 2:
+			
 			*op1=0; //Inicializar a 0 para que no afecte el case anterior ya que el main no lo hace
 			*op2=0;
 			for(i=0;i<(int)strlen(argv[1]);i++)
 			{
 				if(argv[1][i]=='+')
 				{
-					for(j=i+1;j(int)strlen(argv[1]);j++)
+					p1 = (char *)malloc(i);
+					p2 = (char *)malloc(strlen(argv[1] - i));
+					p1 = argv[1];
+					for(j=i+1;j<(int)strlen(argv[1]);j++)
 					{
-						argv[2][n]=argv[1][i+1];
+						p2[j]=argv[1][i+1];
 						n++;
 						i++;
 					}
-					argv[1][i]='\0';
-					*op1=atof(argv[1]);
+					
+					*op1=atof(p1);
 					*op2=atof(argv[2]);
 					strcpy(operacion,"+");
 					printf("1: %f \n2: %f\n",*op1,*op2);
