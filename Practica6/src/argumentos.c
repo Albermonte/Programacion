@@ -170,3 +170,4 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 	return 0;
 	}
 }
+

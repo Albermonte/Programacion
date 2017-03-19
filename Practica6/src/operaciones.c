@@ -33,7 +33,7 @@ int realizarOperacion(double op1, double op2, char operacion)
 				printf("Introduce una operacion correcta\n\n");
 		}
 			
-		printf(" Resultado: %f",resultado);
+		printf(" Resultado: %f\n",resultado);
 		return resultado;
 	}
 }

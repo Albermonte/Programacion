@@ -75,7 +75,7 @@ int main(int argc, char** argv)
 
 
   ret = leerArgs(3, argv, &op1, &op2, &operacion);
-
+	
   if (ret != 0 || op1!=5.0 || op2 != 6.0 || operacion!='+') 
     {
       printf (TxtError,  __FILE__, __LINE__);
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 
   
   ret = leerArgs(2, argv, &op1, &op2, &operacion);
-  
+
   if (ret != 0 || op1!=5.0 || op2 != 6.0 || operacion!='+') 
     {
       printf (TxtError,  __FILE__, __LINE__);
