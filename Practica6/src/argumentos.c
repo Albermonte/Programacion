@@ -103,26 +103,61 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 					p1 = argv[1];
 					for(j=i+1;j<(int)strlen(argv[1]);j++)
 					{
-						p2[j]=argv[1][i+1];
+						p2[n]=argv[1][i+1];
 						n++;
 						i++;
 					}
 					
 					*op1=atof(p1);
-					*op2=atof(argv[2]);
+					*op2=atof(p2);
 					strcpy(operacion,"+");
-					printf("1: %f \n2: %f\n",*op1,*op2);
 				}
 				if(argv[1][i]=='-')
 				{
+					p1 = (char *)malloc(i);
+					p2 = (char *)malloc(strlen(argv[1] - i));
+					p1 = argv[1];
+					for (j = i + 1; j<(int)strlen(argv[1]); j++)
+					{
+						p2[n] = argv[1][i + 1];
+						n++;
+						i++;
+					}
+
+					*op1 = atof(p1);
+					*op2 = atof(p2);
 					strcpy(operacion,"-");
 				}
 				if(argv[1][i]=='*')
 				{
+					p1 = (char *)malloc(i);
+					p2 = (char *)malloc(strlen(argv[1] - i));
+					p1 = argv[1];
+					for (j = i + 1; j<(int)strlen(argv[1]); j++)
+					{
+						p2[n] = argv[1][i + 1];
+						n++;
+						i++;
+					}
+
+					*op1 = atof(p1);
+					*op2 = atof(p2);
 					strcpy(operacion,"*");
 				}
 				if(argv[1][i]=='/')
 				{
+					p1 = (char *)malloc(i);
+					p2 = (char *)malloc(strlen(argv[1] - i));
+					p1 = argv[1];
+					for (j = i + 1; j<(int)strlen(argv[1]); j++)
+					{
+						p2[n] = argv[1][i + 1];
+						n++;
+						i++;
+					}
+
+					*op1 = atof(p1);
+					*op2 = atof(p2);
 					strcpy(operacion,"/");
 				}
 				
