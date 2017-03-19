@@ -29,6 +29,10 @@ int realizarOperacion(double op1, double op2, char operacion)
 				printf("Division: \n");
 				resultado = op1 / op2;
 				break;
+			case '^':
+				printf("Potencia: \n");
+				resultado = pow(op1,op2);
+				break;
 			default:
 				printf("Introduce una operacion correcta\n\n");
 		}

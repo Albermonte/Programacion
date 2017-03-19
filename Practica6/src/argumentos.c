@@ -55,6 +55,13 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 					*op2=atof(argv[2]);
 					strcpy(operacion,"/");
 				}
+				if(argv[1][i]=='^')
+				{
+					
+					*op1=atof(argv[1]);
+					*op2=atof(argv[2]);
+					strcpy(operacion,"^");
+				}
 				
 			}
 			
@@ -86,6 +93,12 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 					*op1=atof(argv[1]);
 					*op2=atof(argv[2]);
 					strcpy(operacion,"/");
+				}
+				if(argv[2][i]=='^')
+				{
+					*op1=atof(argv[1]);
+					*op2=atof(argv[2]);
+					strcpy(operacion,"^");
 				}
 				
 			}	
@@ -159,6 +172,22 @@ int leerArgs(int argc, char **argv, double *op1, double *op2, char *operacion)
 					*op1 = atof(p1);
 					*op2 = atof(p2);
 					strcpy(operacion,"/");
+				}
+				if(argv[1][i]=='^')
+				{
+					p1 = (char *)malloc(i);
+					p2 = (char *)malloc(strlen(argv[1] - i));
+					p1 = argv[1];
+					for (j = i + 1; j<(int)strlen(argv[1]); j++)
+					{
+						p2[n] = argv[1][i + 1];
+						n++;
+						i++;
+					}
+
+					*op1 = atof(p1);
+					*op2 = atof(p2);
+					strcpy(operacion,"^");
 				}
 				
 			}
