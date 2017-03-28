@@ -12,38 +12,49 @@
 
 int abrirFicheroLectura(const char* nombre, FILE ** archivo)
 {
-	*archivo = fopen(nombre,"r");
-	return ferror(*archivo);
+	if(nombre==NULL)
+	{
+		return -1;
+	}
+	else
+	{
+		*archivo = fopen(nombre,"r");
+		return ferror(*archivo);
+	}
 }
 
 int escribirFicheroSinVocales(const char* nombre, const FILE * ficheroOriginal, FILE ** ficheroModificado, int* numCambios)
 {
-	int c;
-	ficheroOriginal=fopen(nombre,"r");
-	*ficheroModificado=fopen("prac07_prueba02.txt","w");
-	while(c!=EOF)
+	if(nombre==NULL)
 	{
-		c=fgetc(ficheroOriginal);
-		if(c!='a' || c!='e' || c!='i' || c!='o' || c!='u')
-		{
-			fwrite(c,1,sizeof(c),*ficheroModificado);
-			*numCambios=*numCambios-1;
-		}
-		*numCambios=*numCambios+1;
+		return -1:
 	}
-	fclose(*ficheroModificado);
-	/*FILE *fp;
-    char a;
-
-    fp = fopen(*ficheroModificado,"r");
-    while(1)
-    {
-       a = fgetc(ficheroModificado);
-       if( feof(ficheroModificado) )
-       {
-          break ;
-       }
-       printf("%c", a);
-    }
-    fclose(ficheroModificado); */
+	else
+	{
+		int c=0;
+		*numCambios=0;
+		if(ficheroOriginal==NULL)
+		{
+			printf("Error de apertura de ficheroOriginal");
+			return -1;
+		}
+		*ficheroModificado=fopen("prac07_prueba01SinVocales.txt","w");
+		if(ficheroModificado==NULL)
+		{
+			printf("Error de apertura de ficheroModificado");
+			return -1;
+		}
+		while(c!=EOF)
+		{	
+			c=fgetc(ficheroOriginal);
+			if(c!='a' || c!='e' || c!='i' || c!='o' || c!='u')
+			{
+				fwrite(c,1,sizeof(c),*ficheroModificado);
+				*numCambios=*numCambios-1;
+			}
+			*numCambios=*numCambios+1;
+		}
+		fclose(*ficheroModificado);
+		return 0;
+	}
 }
