@@ -27,7 +27,7 @@ int escribirFicheroSinVocales(const char* nombre, const FILE * ficheroOriginal, 
 {
 	if(nombre==NULL)
 	{
-		return -1:
+		return -1;
 	}
 	else
 	{
@@ -38,15 +38,19 @@ int escribirFicheroSinVocales(const char* nombre, const FILE * ficheroOriginal, 
 			printf("Error de apertura de ficheroOriginal");
 			return -1;
 		}
+		
 		*ficheroModificado=fopen("prac07_prueba01SinVocales.txt","w");
+		
 		if(ficheroModificado==NULL)
 		{
 			printf("Error de apertura de ficheroModificado");
 			return -1;
 		}
+		
 		while(c!=EOF)
 		{	
 			c=fgetc(ficheroOriginal);
+			
 			if(c!='a' || c!='e' || c!='i' || c!='o' || c!='u')
 			{
 				fwrite(c,1,sizeof(c),*ficheroModificado);
@@ -54,7 +58,9 @@ int escribirFicheroSinVocales(const char* nombre, const FILE * ficheroOriginal, 
 			}
 			*numCambios=*numCambios+1;
 		}
+		
 		fclose(*ficheroModificado);
+		
 		return 0;
 	}
 }

@@ -21,6 +21,7 @@ void modificarNombre(const char* nombre, char ** nombreNuevo)
 
 	int i, j, k, tam, c=0;
 	char aux[]="SinVocales";
+	char aux2[]=".txt";
 	tam=strlen(nombre)+10; //SinVocales=10
 	*nombreNuevo=malloc(tam);
 	
@@ -35,12 +36,11 @@ void modificarNombre(const char* nombre, char ** nombreNuevo)
 		c++;
 	}
 	
-	aux[]=".txt";
 	c=0;
 	
 	for(k=j+1;k<4;k++)
 	{
-		*nombreNuevo[j]=aux[c];
+		*nombreNuevo[j]=aux2[c];
 		c++;
 	}
 	
