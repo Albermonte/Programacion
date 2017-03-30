@@ -12,36 +12,29 @@
 
 int leerFichero(const char* nombreRead, dateTemp_t** datos, int* numDatos, int* numLineasIncorrectas)
 {
-	int i,j=0;
+	int i=0;
+	char ch;
 	FILE * fichero;
 	
 	fichero=fopen(nombreRead,"r");
 	
+	*datos=malloc(sizeof(dateTemp_t));
 	
-	char ch;
-	while(!feof(fichero))  //Meter for's dentro de while para ahorrar lineas
+	while(!feof(fichero))
 	{
   		ch = fgetc(fichero);
   		if(ch == '\n')
   		{
-    		j++;
+    			*(datos)[i].momento.anyo=0;
+			*(datos)[i].momento.mes=0;
+			*(datos)[i].momento.dia=0;
+			*(datos)[i].temperatura=0;
+			fscanf(fichero,"%d-%d-%d\t%f",&datos[i].momento.anyo,&datos[i].momento.mes,&datos[i].momento.dia,&datos[i].temperatura);
+			i++;
+			//realloc
+			*datos=realloc(*datos,sizeof(dateTemp_t)*i);
  		}
-    }
-    
-    *datos=malloc(j*sizeof(dateTemp_t));
-    
-    for(i=0;i<j;i++)
-    {
-    *(datos)[i].momento.anyo=0;
-	*(datos)[i].momento.mes=0;
-	*(datos)[i].momento.dia=0;
-	*(datos)[i].temperatura=0;
-    }
-    for(i=0;i<j;i++)
-    {
-    	fscanf(fichero,"%d-%d-%d\t%f",&datos[i]->momento.anyo,&datos[i]->momento.mes,&datos[i]->momento.dia,&datos[i]->temperatura);
-    }
-	
+    }	
 }
 
 int calcularTempMaxima(const dateTemp_t* datos, int numDatos, float* temp, struct fecha_t* diaM)
