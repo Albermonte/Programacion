@@ -1,0 +1,50 @@
+1. Iniciar variables
+	1. Variable FILE * que apuntará al descriptor del fichero a leer
+	2. Variables para iterar y de retorno (i,j,ret,...)
+	3. Variables en las que guardarçeis el resultado del parsing
+		anyo, mes, dia, temp
+	4. Inicializar variables a las que apuntan numDatos y numLineasIncorrectas a 0
+	
+2. Reservar memoria para datos RESERVA_MALLOX * sizeof(dateTemp_t)
+	1. Comprobar que se ha reservado memoria correctamente
+
+3. Abrir fichero en sólo lectura
+	1. Comprobar que se ha abierto correctamente
+		1. Sí -> Continua lectura
+		2. No -> Retorno negativo(error)
+4. Lectura
+	1. Utilizar fscanf para leer una linea
+	2. Comprobaciones de fecha y temperatura
+		1. Todo correcto:
+			1. Guardar en la posición correspondiente de datos los datos "parseados"
+			2. Mostrar por pantalla los datos leídos
+			3. Incrementar contenido de numDatos
+		2. Algún dato incorrecto:
+			1. Mostrar por pantalla los daros leídos
+			2. Incrementar contenido de numLineasIncorrectas
+	3. ¿Memoria suficiente?
+		1. Si -> Continuar
+		2. No
+			1. realloz para asignar otro bloque de RESERVA_MALLOC
+			estructuras
+			2. Comprobar que se ha reservado correctamente
+5. Final fichero?
+	1. No -> Volver al paso 4
+	2. Sí -> Finalizar bucle
+6. Cerrar fichero si está abierto
+7. Retornar
+	1. 0 si es correcto
+	2. -1 si no
+	
+	
+GUARDAR FICHERO
+
+1. Iniciar variables
+	1. Puntero FILE * que apuntara al descriptor del fichero de escritura
+	2. Variables necesarias para iterar y retorno
+2. Abrir fihcero en modo escritura
+	1. Si se abre correctamente -> Continuar
+	2. Si no se abre correctamente -> Retorno negativo
+3. Recorrer el array al que apunta datos, guardando con formato (fprintf) en el fichero
+4. Cerrar fichero 
+	
