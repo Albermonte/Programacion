@@ -10,3 +10,4 @@ echo Listo!
 echo 
 echo 
 echo 
+http://paulhertz.net/factory/2014/06/ubuntu-12-04-how-to-install-processing/
