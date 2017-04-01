@@ -18,7 +18,7 @@ int leerFichero(const char* nombreRead, dateTemp_t** datos, int* numDatos, int* 
 	
 	fichero=fopen(nombreRead,"r");
 	
-	//*datos=malloc(sizeof(dateTemp_t));
+	*datos=malloc(sizeof(dateTemp_t));
 	
 	while(!feof(fichero))
 	{
