@@ -18,7 +18,7 @@ int leerFichero(const char* nombreRead, dateTemp_t** datos, int* numDatos, int* 
 	
 	fichero=fopen(nombreRead,"r");
 	
-	*datos=malloc(sizeof(dateTemp_t));
+	//*datos=malloc(sizeof(dateTemp_t));
 	
 	while(!feof(fichero))
 	{
@@ -31,9 +31,15 @@ int leerFichero(const char* nombreRead, dateTemp_t** datos, int* numDatos, int* 
 			*(datos)[i].temperatura=0;
 			fscanf(fichero,"%d-%d-%d\t%f",&datos[i].momento.anyo,&datos[i].momento.mes,&datos[i].momento.dia,&datos[i].temperatura);
 			i++;
-			if(*(datos)[i].momento.anyo<1988 || *(datos)[i].momento.anyo>1991|| *(datos)[i].momento.mes<1 || 
-			//realloc
+			if(*(datos)[i].momento.anyo<1988 || *(datos)[i].momento.anyo>1991|| *(datos)[i].momento.mes<1 || *(datos)[i].momento.mes>12 || *(datos)[i].momento.dia<1 || *(datos)[i].momento.dia>31 || *(datos)[i].temperatura<-100 || *(datos)[i].temperatura>100)
+			{
+				i--;
+				*numLineasIncorrectas+=1;
+			}
+			else			//realloc
+			{
 			*datos=realloc(*datos,sizeof(dateTemp_t)*i);
+			}
  		}
     }	
 }
