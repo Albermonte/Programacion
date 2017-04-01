@@ -31,6 +31,7 @@ int leerFichero(const char* nombreRead, dateTemp_t** datos, int* numDatos, int* 
 			*(datos)[i].temperatura=0;
 			fscanf(fichero,"%d-%d-%d\t%f",&datos[i].momento.anyo,&datos[i].momento.mes,&datos[i].momento.dia,&datos[i].temperatura);
 			i++;
+			if(*(datos)[i].momento.anyo<1988 || *(datos)[i].momento.anyo>1991|| *(datos)[i].momento.mes<1 || 
 			//realloc
 			*datos=realloc(*datos,sizeof(dateTemp_t)*i);
  		}
