@@ -18,7 +18,7 @@ if(nombreRead==NULL || datos==NULL || *numDatos<0 || *numLineasIncorrectas<0)
 }
 else
 {
-	int i=0;
+	int i=1;
 	char ch;
 	FILE * fichero;
 	*numDatos=0;
@@ -29,7 +29,8 @@ else
 		return -1;
 	}
 	
-	if((*datos=(dateTemp_t *)malloc(sizeof(dateTemp_t)))==NULL)
+	*datos=(dateTemp_t *)calloc(sizeof(dateTemp_t),RESERVA_MALLOC);
+	if(*datos==NULL)
 	{
 		free(*datos);
 		return -1;
@@ -40,23 +41,35 @@ else
   		ch = fgetc(fichero);
   		if(ch == '\n')
   		{
-    			(*datos)[i].momento.anyo=0;
-			(*datos)[i].momento.mes=0;
-			(*datos)[i].momento.dia=0;
-			(*datos)[i].temperatura=0;
-			fscanf(fichero,"%d-%d-%d\t%f",&(*datos)[i].momento.anyo,&(*datos)[i].momento.mes,&(*datos)[i].momento.dia,&(*datos)[i].temperatura);
-			i++;
-			if((*datos)[i].momento.anyo<1988 || (*datos)[i].momento.anyo>1991|| (*datos)[i].momento.mes<1 || (*datos)[i].momento.mes>12 || (*datos)[i].momento.dia<1 || (*datos)[i].momento.dia>31 || (*datos)[i].temperatura<-100 || (*datos)[i].temperatura>100)
+    			(*datos)[*numDatos].momento.anyo=0;
+			(*datos)[*numDatos].momento.mes=0;
+			(*datos)[*numDatos].momento.dia=0;
+			(*datos)[*numDatos].temperatura=0;
+			
+			fscanf(fichero,"%d-%d-%d\t%f",&(*datos)[*numDatos].momento.anyo,&(*datos)[*numDatos].momento.mes,&(*datos)[*numDatos].momento.dia,&(*datos)[*numDatos].temperatura);
+			
+			if((*datos)[*numDatos].momento.anyo<1988 || (*datos)[*numDatos].momento.anyo>1991|| (*datos)[i].momento.mes<1 || (*datos)[i].momento.mes>12 || (*datos)[*numDatos].momento.dia<1 || (*datos)[*numDatos].momento.dia>31 || (*datos)[*numDatos].temperatura<-100 || (*datos)[*numDatos].temperatura>100)
 			{
-				i--;
-				*numLineasIncorrectas+=1;
+				*numDatos=*numDatos-1;
+				*numLineasIncorrectas=*numLineasIncorrectas+1;
 			}
-			else			//realloc
+			/*else
 			{
-			*datos=(dateTemp_t *)realloc(*datos,sizeof(dateTemp_t)*i);
+				*numDatos=*numDatos+1;
+			}*/
+			
+			printf("%d\n",*numDatos);
+			*numDatos=*numDatos+1;
+			if(*numDatos==RESERVA_MALLOC*i)			//realloc
+			{
+				i++;
+				*datos=(dateTemp_t *)realloc(*datos,RESERVA_MALLOC*i);
 			}
+			
  		}
-    }
+ 		
+    	}
+    
 }	
 }
 
