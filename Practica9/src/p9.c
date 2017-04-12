@@ -331,7 +331,7 @@ int mostrarBBDDenPantallaDesdeFichero(const char *nombreFich)
 
 short int ordenarPorTitulo(const char *nombreFich)
 {
-	int i,j;
+	int i,j,tam;
 	if (nombreFich==NULL)
     {
     	return -1;
@@ -348,26 +348,29 @@ short int ordenarPorTitulo(const char *nombreFich)
 	      Ficha_t aux2;
 	      
 	      	if (fd != NULL)
-			{
+		{
 			rewind(fd);
-		  	for(i=0;i<tam)i++); //ftell, medir tamaño
+			fseek(fd, 0, SEEK_END);
+			tam=ftell(fd); //ftell, medir tamaño
+			rewind(fd);
+		  for(i=0;i<tam;i++); 
+		    {
+		    for(j=0;j<tam-1;j++)
 		    {
 		      fread(&aux1,sizeof(Ficha_t),1,fd);
 		      fread(&aux2,sizeof(Ficha_t),1,fd);
 		      if(strcmp(aux1.titulo,aux2.titulo)<0)
-		      {
+		      { // fseek para volver a la posicion deseada y reescribir
 		      	fseek(fd,-sizeof(Ficha_t)*2,SEEK_SET);
 		      	fwrite(&aux2, sizeof(Ficha_t), 1, fd);
 		      	fwrite(&aux1, sizeof(Ficha_t), 1, fd);	
 		      	fseek(fd,-sizeof(Ficha_t),SEEK_SET);
 		      }
-		      
-		      
+		     }
 		    }
-		    printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+		  }
+	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 		    mostrarBBDDenPantallaDesdeFichero("bbddPeliculas.dat");
-		    // fseek para volver a la posicion deseada y reescribir	
-	}
 	}
 	}
 	}
