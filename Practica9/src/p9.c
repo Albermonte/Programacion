@@ -351,7 +351,7 @@ short int ordenarPorTitulo(const char *nombreFich)
 		{
 			rewind(fd);
 			fseek(fd, 0, SEEK_END);
-			tam=ftell(fd); //ftell, medir tamaño
+			tam=ftell(fd)/sizeof(Ficha_t); //ftell, medir tamaño
 			rewind(fd);
 		  for(i=0;i<tam;i++); 
 		    {
@@ -361,11 +361,12 @@ short int ordenarPorTitulo(const char *nombreFich)
 		      fread(&aux2,sizeof(Ficha_t),1,fd);
 		      if(strcmp(aux1.titulo,aux2.titulo)<0)
 		      { // fseek para volver a la posicion deseada y reescribir
-		      	fseek(fd,-sizeof(Ficha_t)*2,SEEK_SET);
+		      	fseek(fd,-sizeof(Ficha_t)*2,SEEK_CUR);
 		      	fwrite(&aux2, sizeof(Ficha_t), 1, fd);
 		      	fwrite(&aux1, sizeof(Ficha_t), 1, fd);	
-		      	fseek(fd,-sizeof(Ficha_t),SEEK_SET);
+		      	fseek(fd,-sizeof(Ficha_t),SEEK_CUR);
 		      }
+		      //fseek(fd,-sizeof(Ficha_t),SEEK_SET);
 		     }
 		    }
 		  }
