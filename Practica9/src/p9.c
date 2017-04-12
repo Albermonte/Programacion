@@ -349,26 +349,32 @@ short int ordenarPorTitulo(const char *nombreFich)
 	      
 	      	if (fd != NULL)
 		{
-			rewind(fd);
-			fseek(fd, 0, SEEK_END);
-			tam=ftell(fd)/sizeof(Ficha_t); //ftell, medir tamaño
-			rewind(fd);
+		rewind(fd);
+		fseek(fd, 0, SEEK_END);
+		tam=ftell(fd)/sizeof(Ficha_t); //Medir tamaño
+		rewind(fd);
 		  for(i=0;i<tam;i++); 
 		    {
-		    for(j=0;j<tam-1;j++)
+		    for(j=0;j<tam-i;j++)
 		    {
+		      fseek(fd,sizeof(Ficha_t)*j,SEEK_SET);
 		      fread(&aux1,sizeof(Ficha_t),1,fd);
+		      fseek(fd,sizeof(Ficha_t)*(j+1),SEEK_SET);
 		      fread(&aux2,sizeof(Ficha_t),1,fd);
-		      if(strcmp(aux1.titulo,aux2.titulo)<0)
-		      { // fseek para volver a la posicion deseada y reescribir
-		      	fseek(fd,-sizeof(Ficha_t)*2,SEEK_CUR);
+		      
+		      if(strcmp(aux2.titulo,aux1.titulo)<0)
+		      { 
+		        //fseek(fd,(sizeof(Ficha_t)*-2),SEEK_CUR);// fseek para volver a la posicion deseada y reescribir
+		        if(fseek(fd,sizeof(Ficha_t)*j,SEEK_SET)){
+		        printf("ERROR");
+		        }
 		      	fwrite(&aux2, sizeof(Ficha_t), 1, fd);
-		      	fwrite(&aux1, sizeof(Ficha_t), 1, fd);	
-		      	fseek(fd,-sizeof(Ficha_t),SEEK_CUR);
+		      	fseek(fd,sizeof(Ficha_t)*(j+1),SEEK_SET);
+		      	fwrite(&aux1, sizeof(Ficha_t), 1, fd);
 		      }
-		      //fseek(fd,-sizeof(Ficha_t),SEEK_SET);
 		     }
 		    }
+		    rewind(fd);
 		  }
 	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 		    mostrarBBDDenPantallaDesdeFichero("bbddPeliculas.dat");
