@@ -1,0 +1,9 @@
+Funciones importantes:
+
+ftell
+fseek
+rewind
+fread
+fopen (r+b)
+fwrite
+fflush
