@@ -330,9 +330,12 @@ int mostrarBBDDenPantallaDesdeFichero(const char *nombreFich)
 
 
 short int ordenarPorTitulo(const char *nombreFich)
-{
-	int i,j,tam;
-	if (nombreFich==NULL)
+{	      
+    int i,j,tam;
+    FILE * fp;
+    Ficha_t aux1, aux2;
+	
+    if (nombreFich==NULL)
     {
     	return -1;
     }
@@ -342,53 +345,107 @@ short int ordenarPorTitulo(const char *nombreFich)
 	{
 	  if( access( nombreFich, W_OK ) != -1 ) 
 	    {
-	      FILE * fd;
-	      fd = fopen(nombreFich,"r+b");    
-	      Ficha_t aux1;
-	      Ficha_t aux2;
-	      
-	      	if (fd != NULL)
+	    	fp=fopen(nombreFich,"r+b");
+	      	if (fp!= NULL)
 		{
-		rewind(fd);
-		fseek(fd, 0, SEEK_END);
-		tam=ftell(fd)/sizeof(Ficha_t); //Medir tamaño
-		rewind(fd);
-		  for(i=0;i<tam;i++); 
-		    {
-		    for(j=0;j<tam-i;j++)
-		    {
-		      fseek(fd,sizeof(Ficha_t)*j,SEEK_SET);
-		      fread(&aux1,sizeof(Ficha_t),1,fd);
-		      fseek(fd,sizeof(Ficha_t)*(j+1),SEEK_SET);
-		      fread(&aux2,sizeof(Ficha_t),1,fd);
-		      
-		      if(strcmp(aux2.titulo,aux1.titulo)<0)
-		      { 
-		        //fseek(fd,(sizeof(Ficha_t)*-2),SEEK_CUR);// fseek para volver a la posicion deseada y reescribir
-		        if(fseek(fd,sizeof(Ficha_t)*j,SEEK_SET)){
-		        printf("ERROR");
-		        }
-		      	fwrite(&aux2, sizeof(Ficha_t), 1, fd);
-		      	fseek(fd,sizeof(Ficha_t)*(j+1),SEEK_SET);
-		      	fwrite(&aux1, sizeof(Ficha_t), 1, fd);
-		      }
-		     }
-		    }
-		    rewind(fd);
-		  }
-	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-		    mostrarBBDDenPantallaDesdeFichero("bbddPeliculas.dat");
-	}
-	}
+			fseek(fp,0,SEEK_END);
+
+					tam=ftell(fp)/sizeof(Ficha_t);
+
+					for(i=0;i<tam;i++)
+					{
+						for(j=0;j<tam-i;j++)
+						{
+							fread(&aux1,sizeof(Ficha_t),1,fp);
+							fread(&aux2,sizeof(Ficha_t),1,fp);
+							fseek(fp,-2*sizeof(Ficha_t),SEEK_CUR);
+
+							if(strcmp(aux2.titulo,aux1.titulo)<0)
+							{
+
+								fwrite(&aux2,sizeof(Ficha_t),1,fp);
+								fwrite(&aux1,sizeof(Ficha_t),1,fp);
+								fflush(fp);
+							}
+
+							if(j==0)
+							{
+								fseek(fp,sizeof(Ficha_t),SEEK_SET);
+							}
+
+							else
+							{
+								fseek(fp,j*sizeof(Ficha_t),SEEK_SET);
+							}
+
+						}
+						rewind(fp);
+					}
+		}
+	    }
 	}
 	return 0;
+    }
 }
 
 
 
 short int ordenarPorYear(const char *nombreFich)
 {
-  
+    int i,j,tam;
+    FILE * fp;
+    Ficha_t aux1, aux2;
+	
+    if (nombreFich==NULL)
+    {
+    	return -1;
+    }
+    else
+    {     
+      if( access( nombreFich, F_OK ) != -1 ) 
+	{
+	  if( access( nombreFich, W_OK ) != -1 ) 
+	    {
+	    	fp=fopen(nombreFich,"r+b");
+	      	if (fp!= NULL)
+		{
+			fseek(fp,0,SEEK_END);
+
+					tam=ftell(fp)/sizeof(Ficha_t);
+
+					for(i=0;i<tam;i++)
+					{
+						for(j=0;j<(tam-i)+1;j++)
+						{
+							fread(&aux1,sizeof(Ficha_t),1,fp);
+							fread(&aux2,sizeof(Ficha_t),1,fp);
+
+							fseek(fp,-2*sizeof(Ficha_t),SEEK_CUR);
+
+							if(aux2.year<aux1.year)
+							{
+
+								fwrite(&aux2,sizeof(Ficha_t),1,fp);
+								fwrite(&aux1,sizeof(Ficha_t),1,fp);
+								fflush(fp);
+							}
+
+							if(j==0)
+							{
+								fseek(fp,sizeof(Ficha_t),SEEK_SET);
+							}
+							else
+							{
+								fseek(fp,j*sizeof(Ficha_t),SEEK_SET);
+							}
+						}
+						rewind(fp);
+					}
+		}
+	    }
+	}
+	return 0;
+    }
 
 }
 
@@ -396,7 +453,59 @@ short int ordenarPorYear(const char *nombreFich)
 
 short int ordenarPorNota(const char *nombreFich)
 {
- 
+    int i,j,tam;
+    FILE * fp;
+    Ficha_t aux1, aux2;
+	
+    if (nombreFich==NULL)
+    {
+    	return -1;
+    }
+    else
+    {     
+      if( access( nombreFich, F_OK ) != -1 ) 
+	{
+	  if( access( nombreFich, W_OK ) != -1 ) 
+	    {
+	    	fp=fopen(nombreFich,"r+b");
+	      	if (fp!= NULL)
+		{
+			fseek(fp,0,SEEK_END);
+
+					tam=ftell(fp)/sizeof(Ficha_t);
+
+					for(i=0;i<tam;i++)
+					{
+						for(j=0;j<tam-i;j++)
+						{
+							fread(&aux1,sizeof(Ficha_t),1,fp);
+							fread(&aux2,sizeof(Ficha_t),1,fp);
+							fseek(fp,-2*sizeof(Ficha_t),SEEK_CUR);
+
+							if(aux2.notaIMDB<aux1.notaIMDB)
+							{
+
+								fwrite(&aux2,sizeof(Ficha_t),1,fp);
+								fwrite(&aux1,sizeof(Ficha_t),1,fp);
+								fflush(fp);
+							}
+
+							if(j==0)
+							{
+								fseek(fp,sizeof(Ficha_t),SEEK_SET);
+							}
+							else
+							{
+								fseek(fp,j*sizeof(Ficha_t),SEEK_SET);
+							}
+						}
+						rewind(fp);
+					}
+		}
+	    }
+	}
+	return 0;
+    } 
 
 }
 
