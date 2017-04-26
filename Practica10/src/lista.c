@@ -7,6 +7,18 @@
  [IN] coche. Nuevo elemento a añadir.
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int aniadirPrincipio(Coche_t **pcab, const char *matricula) {
+	Coche_t *coche;
+
+	*coche = (Coche_t *)malloc(sizeof(Coche_t));
+	if (coche == NULL)
+	{
+		return -1;
+	}
+	else
+	{
+		strcpy(*(coche).matricula,matricula);
+		*(aux)->
+	}
    
 }
 
