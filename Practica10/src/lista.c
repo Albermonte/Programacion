@@ -7,15 +7,14 @@
  [IN] coche. Nuevo elemento a añadir.
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int aniadirPrincipio(Coche_t **pcab, const char *matricula) {
-if(pcab==NULL || matricula==NULL)
+if(*pcab==NULL || matricula==NULL)
 {
 return -1;
 }
 else
 {
 	Coche_t *coche;
-*coche=*pcab;
-	coche = (Coche_t *)malloc(sizeof(Coche_t));
+	*coche=**pcab;
 	if (coche == NULL)
 	{
 		return -1;
@@ -40,7 +39,7 @@ int listar(Coche_t *pcab) {
    {
    		Coche_t *coche;
    		*coche=*pcab;
-   		printf("Matricula [%s]",coche.matricula);
+   		printf("Matricula [%s]",coche->matricula);
    		coche=coche->sig;
    		
    }
@@ -52,14 +51,18 @@ int listar(Coche_t *pcab) {
  [IN] nueva. Nueva matricula que sustituye a la anterior
  Devuelve 0 si ha encontrado la clave o -1 en caso contrario*/
 int modificar(Coche_t **pcab, char *matricula, char *nueva) {
-if(**pad==NULL || *matricula==NULL || *nueva==NULL)
+if(*pcab==NULL || matricula==NULL || nueva==NULL)
 {
 return -1;
 }
 else
 {
+Coche_t *nodo;
 
+*nodo=**pcab;
+nodo=buscarNodo(&nodo, matricula);
 
+strcpy(nodo->matricula,nueva);
 
 return 0;
 }
@@ -71,7 +74,7 @@ return 0;
  Devuelve 0 si ha encontrado la clave o -1 en caso contrario*/
 int borrarNodo(Coche_t **pcab, char *matricula) 
 {
-if(**pcab==NULL || *matricula==NULL)
+if(*pcab==NULL || matricula==NULL)
 {
 return -1;
 }
@@ -87,6 +90,17 @@ return 0;
  [IN/OUT] incio. Puntero al primer nodo de la lista
  [IN] matricula. Matricula a buscar*/
 Coche_t* buscarNodoAnt(Coche_t **pcab, char *matricula) {
+	Coche_t *coche;
+	Coche_t *cocheAnt;
+	
+	*coche=**pcab;
+	while(coche!=NULL && strcmp(coche->matricula,matricula)!=0)
+   	{
+   		cocheAnt=coche;
+   		coche=coche->sig;
+   		
+  	}
+  	return &cocheAnt;
    
 }
 
@@ -97,7 +111,7 @@ Coche_t* buscarNodoAnt(Coche_t **pcab, char *matricula) {
 Coche_t* buscarNodo(Coche_t **pcab, char *matricula) {
    Coche_t *coche;
    
-   *coche=*pcab;
+   *coche=**pcab;
    while(coche!=NULL && strcmp(coche->matricula,matricula)!=0)
    {
    		coche=coche->sig;
@@ -116,7 +130,7 @@ Coche_t* buscarNodo(Coche_t **pcab, char *matricula) {
  [IN/OUT] incio. Puntero al primer nodo de la lista
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int borrarAlPrincipio(Coche_t **pcab) {
-if(**pcab==NULL)
+if(pcab==NULL)
 {
 return -1;
 }
@@ -152,3 +166,4 @@ int ordenarLista(Coche_t **pcab, int orden) {
 int aniadirOrdenado(Coche_t **pcab, char *matricula, int orden) {
     
 }
+
