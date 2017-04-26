@@ -7,19 +7,28 @@
  [IN] coche. Nuevo elemento a añadir.
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int aniadirPrincipio(Coche_t **pcab, const char *matricula) {
+if(pcab==NULL || matricula==NULL)
+{
+return -1;
+}
+else
+{
 	Coche_t *coche;
-
-	*coche = (Coche_t *)malloc(sizeof(Coche_t));
+*coche=*pcab;
+	coche = (Coche_t *)malloc(sizeof(Coche_t));
 	if (coche == NULL)
 	{
 		return -1;
 	}
 	else
 	{
-		strcpy(*(coche).matricula,matricula);
-		*(aux)->
+		strcpy(coche->matricula,matricula);
+		coche->sig=*pcab;
+		*pcab=coche;
 	}
-   
+	
+return 0;
+}  
 }
 
 
@@ -27,7 +36,14 @@ int aniadirPrincipio(Coche_t **pcab, const char *matricula) {
  [IN] pcab. Puntero a la lista a mostrar por pantalla
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int listar(Coche_t *pcab) {
-   
+   while(pcab!=NULL)
+   {
+   		Coche_t *coche;
+   		*coche=*pcab;
+   		printf("Matricula [%s]",coche.matricula);
+   		coche=coche->sig;
+   		
+   }
 }
 
 /*busca el nodo con la matricula deseada y modifica su valor 
@@ -36,7 +52,17 @@ int listar(Coche_t *pcab) {
  [IN] nueva. Nueva matricula que sustituye a la anterior
  Devuelve 0 si ha encontrado la clave o -1 en caso contrario*/
 int modificar(Coche_t **pcab, char *matricula, char *nueva) {
-    
+if(**pad==NULL || *matricula==NULL || *nueva==NULL)
+{
+return -1;
+}
+else
+{
+
+
+
+return 0;
+}
 }
 
 /*busca el nodo con la matricula deseada y lo elimina de la lista
@@ -45,7 +71,15 @@ int modificar(Coche_t **pcab, char *matricula, char *nueva) {
  Devuelve 0 si ha encontrado la clave o -1 en caso contrario*/
 int borrarNodo(Coche_t **pcab, char *matricula) 
 {
-   
+if(**pcab==NULL || *matricula==NULL)
+{
+return -1;
+}
+else
+{
+
+return 0;
+}   
 }
 
 /*busca el nodo con la matricula deseada y devuelve el puntero anterior a ese nodo.
@@ -61,14 +95,37 @@ Coche_t* buscarNodoAnt(Coche_t **pcab, char *matricula) {
  [IN/OUT] incio. Puntero al primer nodo de la lista
  [IN] matricula. Matricula a buscar*/
 Coche_t* buscarNodo(Coche_t **pcab, char *matricula) {
+   Coche_t *coche;
    
+   *coche=*pcab;
+   while(coche!=NULL && strcmp(coche->matricula,matricula)!=0)
+   {
+   		coche=coche->sig;
+   }
+   if(coche==NULL)
+   {
+   return NULL;
+   }
+   else
+   {
+   return &coche;
+   }
 }
 
 /*Borra el primer elemento de la lista
  [IN/OUT] incio. Puntero al primer nodo de la lista
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int borrarAlPrincipio(Coche_t **pcab) {
-    
+if(**pcab==NULL)
+{
+return -1;
+}
+else
+{
+
+
+return 0;    
+}
 }
 
 /*Libera toda la memoria reservada.
