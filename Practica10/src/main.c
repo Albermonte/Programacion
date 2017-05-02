@@ -1,10 +1,11 @@
 /* Nombre Fichero: src/main.c */
 
-#include "lista.h"
+#include "../include/lista.h"
 
 int validarLista(Coche_t **, int );
 
 int main() {
+	int a;
     int test = 0, i, j;
     const int NUM_MAT = 5;
     Coche_t *lista = NULL;

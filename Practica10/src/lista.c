@@ -1,19 +1,19 @@
 /* Nombre Fichero: src/lista.c */
 
-#include "lista.h"
+#include "../include/lista.h"
 
 /*Añade un nuevo nodo al principio de la lista y rellena el nodo con la matrícula pasada como parametro.
  [IN/OUT] pcab. Dirección del puntero al primer nodo de la lista.
  [IN] coche. Nuevo elemento a añadir.
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int aniadirPrincipio(Coche_t **pcab, const char *matricula) {
-if(*pcab==NULL || matricula==NULL)
+if(pcab==NULL || matricula==NULL)
 {
 return -1;
 }
 else
 {
-	Coche_t *coche;
+	Coche_t *coche=(Coche_t*)malloc(sizeof(Coche_t));
 	*coche=**pcab;
 	if (coche == NULL)
 	{
@@ -25,7 +25,7 @@ else
 		coche->sig=*pcab;
 		*pcab=coche;
 	}
-	
+
 return 0;
 }  
 }
@@ -51,13 +51,18 @@ int listar(Coche_t *pcab) {
  [IN] nueva. Nueva matricula que sustituye a la anterior
  Devuelve 0 si ha encontrado la clave o -1 en caso contrario*/
 int modificar(Coche_t **pcab, char *matricula, char *nueva) {
-if(*pcab==NULL || matricula==NULL || nueva==NULL)
+if(pcab==NULL || matricula==NULL || nueva==NULL)
 {
 return -1;
 }
 else
 {
-Coche_t *nodo;
+Coche_t *nodo=NULL;
+
+if(nodo==NULL)
+{
+	return -1;
+}
 
 *nodo=**pcab;
 nodo=buscarNodo(&nodo, matricula);
@@ -74,14 +79,28 @@ return 0;
  Devuelve 0 si ha encontrado la clave o -1 en caso contrario*/
 int borrarNodo(Coche_t **pcab, char *matricula) 
 {
-if(*pcab==NULL || matricula==NULL)
+if(pcab==NULL || matricula==NULL)
 {
 return -1;
 }
 else
 {
+	Coche_t *nodo=NULL,*nodo2=NULL;
+	*nodo = **pcab;
+	*nodo2 = **pcab;
 
-return 0;
+
+	if (nodo == NULL)
+	{
+		return -1;
+	}
+	nodo = buscarNodo(&nodo, matricula);
+	nodo->sig = nodo2->sig;
+	if (q == lista) 
+		lista = lista->siguiente;
+	free(q);
+	
+	return 0;
 }   
 }
 
@@ -90,8 +109,8 @@ return 0;
  [IN/OUT] incio. Puntero al primer nodo de la lista
  [IN] matricula. Matricula a buscar*/
 Coche_t* buscarNodoAnt(Coche_t **pcab, char *matricula) {
-	Coche_t *coche;
-	Coche_t *cocheAnt;
+	Coche_t *coche=(Coche_t*)malloc(sizeof(Coche_t));
+	Coche_t *cocheAnt=(Coche_t*)malloc(sizeof(Coche_t));
 	
 	*coche=**pcab;
 	while(coche!=NULL && strcmp(coche->matricula,matricula)!=0)
@@ -109,7 +128,7 @@ Coche_t* buscarNodoAnt(Coche_t **pcab, char *matricula) {
  [IN/OUT] incio. Puntero al primer nodo de la lista
  [IN] matricula. Matricula a buscar*/
 Coche_t* buscarNodo(Coche_t **pcab, char *matricula) {
-   Coche_t *coche;
+   Coche_t *coche=(Coche_t*)malloc(sizeof(Coche_t));;
    
    *coche=**pcab;
    while(coche!=NULL && strcmp(coche->matricula,matricula)!=0)
