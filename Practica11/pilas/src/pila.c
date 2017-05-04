@@ -1,6 +1,6 @@
 /* Nombre Fichero: include/pila.c */
 
-#include "../include/pila.h"
+#include "pila.h"
 
 /*Añade un nuevo nodo al principio de la lista y rellena el nodo con la matrícula pasada como parametro.
  [IN/OUT] pcab. Dirección del puntero al primer nodo de la lista.
