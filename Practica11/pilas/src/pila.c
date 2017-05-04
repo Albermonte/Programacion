@@ -12,7 +12,7 @@ int aniadirPrincipio(Coche_t** pcab, const char* matricula)
 	{
 		return -1;
 	}
-	Coche_t* nodo=pcab;
+	Coche_t* nodo=*pcab;
 	Coche_t* temp;
 	temp = (Coche_t*)malloc(sizeof(Coche_t));
 
@@ -54,6 +54,15 @@ int listar(Coche_t* pcab)
  Devuelve 0 si todo ha salido bien o -1 si ha habido errores*/
 int borrarAlPrincipio(Coche_t** pcab)
 {
+	if(pcab==NULL)
+	{
+		return -1;
+	}
+	Coche_t *nodo=*pcab;
+	if(nodo==NULL)
+	{
+		return -1;
+	}
 }
 
 /*Libera toda la memoria reservada.
