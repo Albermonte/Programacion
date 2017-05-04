@@ -64,9 +64,17 @@ int borrarAlPrincipio(Coche_t** pcab)
 	{
 		return -1;
 	}
-	nodo = nodo->sig;
-	free(nodo);
-	*pcab = nodo;
+	if (nodo->sig == NULL)
+	{
+		free(nodo);
+		*pcab = NULL;
+	}
+	else
+	{
+		free(nodo);
+		nodo = nodo->sig;
+		*pcab = nodo;
+	}
 	return 0;
 }
 
