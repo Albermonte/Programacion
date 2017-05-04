@@ -25,6 +25,7 @@ int aniadirPrincipio(Coche_t** pcab, const char* matricula)
 		temp->sig = nodo;
 		strcpy(temp->matricula, matricula);
 		nodo = temp;
+		*pcab = nodo;
 	}
 	return 0;
 }
@@ -63,6 +64,10 @@ int borrarAlPrincipio(Coche_t** pcab)
 	{
 		return -1;
 	}
+	nodo = nodo->sig;
+	free(nodo);
+	*pcab = nodo;
+	return 0;
 }
 
 /*Libera toda la memoria reservada.
