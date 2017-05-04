@@ -1,6 +1,6 @@
 /* Nombre Fichero: src/main.c */
 
-#include "pila.h"
+#include "../include/pila.h"
 
 int main() {
     int test = 0, i;
