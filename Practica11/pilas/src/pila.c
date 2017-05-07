@@ -59,29 +59,37 @@ int borrarAlPrincipio(Coche_t** pcab)
 	{
 		return -1;
 	}
-	Coche_t *nodo=*pcab;
+	if(*pcab==NULL)
+	{
+		return -1; // Lista vacia
+	}
+	
+	Coche_t *nodo = *pcab;
+	
 	if(nodo==NULL)
 	{
 		return -1;
 	}
-	if (nodo->sig == NULL)
-	{
-		free(nodo);
-		*pcab = NULL;
-	}
-	else
-	{
-		free(nodo);
-		nodo = nodo->sig;
-		*pcab = nodo;
-	}
+	
+	*pcab = (*pcab)->sig;
+	free(nodo);
+	
 	return 0;
 }
 
 /*Libera toda la memoria reservada.
  [IN/OUT] pcab. Dirección del puntero al primer nodo de la lista*/
 void liberarMemoria(Coche_t** pcab)
-{
+{	
+	Coche_t *nodo=*pcab;
+	
+	while(nodo != NULL)
+	{
+		*pcab = (*pcab)->sig;
+		free(nodo);
+		nodo = *pcab;
+	}
 }
+
 
 
