@@ -85,11 +85,12 @@ int borrarAlFinal(Coche_t** pcab)
  [IN/OUT] pcab. Dirección del puntero al primer nodo de la lista*/
 void liberarMemoria(Coche_t** pcab)
 {
-	while (*pcab != NULL)
-	{
-		borrarAlFinal(pcab);
-	}
 	Coche_t* nodo = *pcab;
-	free(nodo);
+	while(nodo != NULL)
+	{
+		*pcab = (*pcab)->sig;
+		free(nodo);
+		nodo = *pcab;
+	}
 }
 

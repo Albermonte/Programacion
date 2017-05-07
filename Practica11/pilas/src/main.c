@@ -80,7 +80,6 @@ int main() {
 
     liberarMemoria(&pila);
     listar(pila);
-	getchar();
     return 0;
 }
 
