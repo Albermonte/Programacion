@@ -35,7 +35,7 @@ int aniadirNodo(Nodo_t** nodo, char id, float distancia)
 			(*nodo)->punto.id=id;
 			(*nodo)->punto.distancia=distancia;
 			(*nodo)->hijoIzq=(*nodo)->hijoDer=NULL;
-			return 0;
+			return 1;
 		}
 	}
 	else
@@ -53,7 +53,7 @@ int aniadirNodo(Nodo_t** nodo, char id, float distancia)
 			return -1;
 		}
 	}
-	return 0;
+	return 1;
 }
 
 
