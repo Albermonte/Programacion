@@ -21,8 +21,39 @@
  * [RET] return: devuelve -1 si la operación no se ha podido realizar */
 int aniadirNodo(Nodo_t** nodo, char id, float distancia)
 {
-  
- 
+
+	if((*nodo)==NULL)
+	{
+		(*nodo)=(Nodo_t *)malloc(sizeof(Nodo_t));
+		if((*nodo)==NULL)
+		{
+			printf("Falta memoria");
+			return -1;
+		}
+		else
+		{
+			(*nodo)->punto.id=id;
+			(*nodo)->punto.distancia=distancia;
+			(*nodo)->hijoIzq=(*nodo)->hijoDer=NULL;
+			return 0;
+		}
+	}
+	else
+	{
+		if((*nodo)->punto.id<id) //Izq
+		{
+			return aniadirNodo(&((*nodo)->hijoIzq),id,distancia);
+		}
+		else if((*nodo)->punto.id>id) //Der
+		{
+			return aniadirNodo(&((*nodo)->hijoDer),id,distancia);
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	return 0;
 }
 
 
@@ -41,7 +72,21 @@ int eliminarNodo(Nodo_t** nodo, char id)
  * [RET] return: devuelve el número de nodos */
 int contarNodos(const Nodo_t* nodo)
 {
-  
+	int nIzq=0, nDer=0;
+	if(nodo==NULL)
+	{ 
+		return 0;
+	}
+	if(nodo->hijoIzq!=NULL || nodo->hijoDer!=NULL)
+	{
+		nIzq += contarNodos(nodo->hijoIzq);
+		nDer += contarNodos(nodo->hijoDer);
+	}
+	else
+	{
+		return 1;
+	}
+	return (nIzq+nDer+1);  // +1 porque el primer nodo no se cuenta
 }
 
 
@@ -51,6 +96,9 @@ int contarNodos(const Nodo_t* nodo)
  * [RET] return: devuelve -1 si la operación no se ha podido realizar */
 int borrarArbol(Nodo_t** nodo)
 {
-  
+  if(nodo==NULL || *nodo==NULL)
+  {
+  	return -1;
+  }
 }
 
