@@ -86,6 +86,7 @@ int contarNodos(const Nodo_t* nodo)
 	{
 		return 1;
 	}
+	
 	return (nIzq+nDer+1);  // +1 porque el primer nodo no se cuenta
 }
 
@@ -96,9 +97,12 @@ int contarNodos(const Nodo_t* nodo)
  * [RET] return: devuelve -1 si la operación no se ha podido realizar */
 int borrarArbol(Nodo_t** nodo)
 {
-  if(nodo==NULL || *nodo==NULL)
-  {
-  	return -1;
-  }
+	if((*nodo)!=NULL)
+	{
+		borrarArbol(&((*nodo)->hijoIzq));
+		borrarArbol(&((*nodo)->hijoDer));
+		free((*nodo));
+	}
+	return 0;
 }
 
