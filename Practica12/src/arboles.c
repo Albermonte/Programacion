@@ -40,11 +40,11 @@ int aniadirNodo(Nodo_t** nodo, char id, float distancia)
 	}
 	else
 	{
-		if((*nodo)->punto.id<id) //Izq
+		if((*nodo)->punto.id>id) //Izq
 		{
 			return aniadirNodo(&((*nodo)->hijoIzq),id,distancia);
 		}
-		else if((*nodo)->punto.id>id) //Der
+		else if((*nodo)->punto.id<id) //Der
 		{
 			return aniadirNodo(&((*nodo)->hijoDer),id,distancia);
 		}
@@ -123,7 +123,9 @@ int borrarArbol(Nodo_t** nodo)
 		borrarArbol(&((*nodo)->hijoIzq));
 		borrarArbol(&((*nodo)->hijoDer));
 		free((*nodo));
+		
 	}
+	*nodo = NULL;
 	return 0;
 }
 
