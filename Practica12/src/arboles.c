@@ -63,7 +63,24 @@ int aniadirNodo(Nodo_t** nodo, char id, float distancia)
  * [RET] return: devuelve -1 si la operación no se ha podido realizar */
 int eliminarNodo(Nodo_t** nodo, char id)
 {
-  
+	if(*nodo==NULL)
+	{
+		return -1;
+	}
+	else if(id>(*nodo)->punto.id)
+	{
+		return eliminarNodo(&((*nodo)->hijoDer), id);
+	}
+	else if (id<(*nodo)->punto.id)
+	{
+		return eliminarNodo(&((*nodo)->hijoIzq), id);
+	}
+	else
+	{
+		free(*nodo);
+		return 0;
+	}
+
 }
 
 
@@ -87,7 +104,7 @@ int contarNodos(const Nodo_t* nodo)
 		return 1;
 	}
 	
-	return (nIzq+nDer+1);  // +1 porque el primer nodo no se cuenta
+	return nIzq+nDer+1;  // +1 porque el primer nodo no se cuenta
 }
 
 
@@ -97,6 +114,10 @@ int contarNodos(const Nodo_t* nodo)
  * [RET] return: devuelve -1 si la operación no se ha podido realizar */
 int borrarArbol(Nodo_t** nodo)
 {
+	if(nodo==NULL)
+	{
+		return -1;
+	}
 	if((*nodo)!=NULL)
 	{
 		borrarArbol(&((*nodo)->hijoIzq));
