@@ -94,7 +94,7 @@ int contarNodos(const Nodo_t* nodo)
 	{ 
 		return 0;
 	}
-	if(nodo->hijoIzq!=NULL || nodo->hijoDer!=NULL)
+	if((nodo->hijoIzq)!=NULL || (nodo->hijoDer)!=NULL)
 	{
 		nIzq += contarNodos(nodo->hijoIzq);
 		nDer += contarNodos(nodo->hijoDer);
@@ -114,10 +114,6 @@ int contarNodos(const Nodo_t* nodo)
  * [RET] return: devuelve -1 si la operación no se ha podido realizar */
 int borrarArbol(Nodo_t** nodo)
 {
-	if(nodo==NULL)
-	{
-		return -1;
-	}
 	if((*nodo)!=NULL)
 	{
 		borrarArbol(&((*nodo)->hijoIzq));
